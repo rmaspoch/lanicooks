@@ -1,0 +1,56 @@
+{
+  "name": "lanicooks",
+  "private": true,
+  "description": "Lani Cooks blog",
+  "version": "1.0.0",
+  "author": "@lanicooks",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop -o",
+    "start": "npm run develop",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+  },
+  "dependencies": {
+    "@contentful/gatsby-transformer-contentful-richtext": "^12.1.2",
+    "@emotion/core": "^10.0.5",
+    "@emotion/styled": "^10.0.5",
+    "emotion": "^10.0.5",
+    "emotion-server": "^10.0.5",
+    "gatsby": "^2.0.53",
+    "gatsby-image": "^2.0.20",
+    "gatsby-plugin-emotion": "^4.0.1",
+    "gatsby-plugin-manifest": "^2.0.9",
+    "gatsby-plugin-offline": "^2.0.16",
+    "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-source-contentful": "^2.0.21",
+    "gatsby-source-filesystem": "^2.0.8",
+    "gatsby-transformer-remark": "^2.1.17",
+    "gatsby-transformer-sharp": "^2.1.8",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "typeface-open-sans": "0.0.54",
+    "typeface-oswald": "0.0.54"
+  },
+  "devDependencies": {
+    "babel-plugin-emotion": "^10.0.5",
+    "babel-plugin-tailwind-components": "^0.5.10",
+    "dotenv": "^6.2.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "prettier": "^1.15.2",
+    "tailwindcss": "^0.7.3"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmaspoch/lanicooks"
+  }
+}
