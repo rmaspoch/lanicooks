@@ -1,61 +1,65 @@
-import React from 'react';
+import React from 'react'
 
-import { graphql } from 'gatsby';
+import { graphql } from 'gatsby'
 
-import 'typeface-oswald';
-import 'typeface-open-sans';
+import 'typeface-oswald'
+import 'typeface-open-sans'
 
-import styled from '@emotion/styled';
+import Layout from '../components/Layout'
+import SEO from '../components/SEO'
+import PageBody from '../components/PageBody'
+import SectionHeader from '../components/SectionHeader'
+import PostPreviewList from '../components/PostPreviewList'
 
-import Layout from '../components/Layout';
-import SEO from '../components/SEO';
-import PostPreview from '../components/PostPreview';
-
-import '../styles/global';
-
-const SectionHeader = styled.div`
-  ${tw`font-display font-medium tracking-tight text-3xl uppercase mt-4`}
-`;
+import '../styles/global'
 
 const IndexPage = ({ data }) => {
-  const posts = data.allContentfulBlogPost.edges;
+  const heroImage = data.heroImage.childImageSharp
+  const posts = data.allContentfulBlogPost.edges
+
   return (
-    <Layout showHero={true}>
+    <Layout heroImage={heroImage}>
       <SEO title="Home" keywords={[`lani cooks`, `cooking`, `blog`]} />
-      <SectionHeader>Recent Posts</SectionHeader>
-      {
-        posts.map(({ node }) => {
-          return (
-            <PostPreview key={node.slug} post={node} />
-          );
-        })
-      }
+      <PageBody>
+        <SectionHeader title="Recent Posts" />
+        <PostPreviewList posts={posts} />
+      </PageBody>
     </Layout>
-  );
+  )
 }
 
-export default IndexPage;
+export default IndexPage
 
 export const pageQuery = graphql`
   query pageQuery {
-    allContentfulBlogPost (sort: { fields: [publishDate], order: DESC }) {
+    heroImage: file(relativePath: { eq: "cooking.png" }) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    allContentfulBlogPost(
+      sort: { fields: [publishDate], order: DESC }
+      limit: 500
+    ) {
       edges {
         node {
+          id
           title
           description {
-            childMarkdownRemark {
-              html
-            }
+            description
           }
           slug
-          publishDate(formatString: "MMMM Do, YYYY")
-          thumbnail {
-            sizes(maxWidth: 180, maxHeight: 180, resizingBehavior: SCALE) {
-              ...GatsbyContentfulSizes_withWebp
+          publishDate(formatString: "MMMM DD, YYYY")
+          featureImage {
+            title
+            fluid(maxWidth: 1920) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
             }
           }
         }
       }
     }
   }
-`;
+`

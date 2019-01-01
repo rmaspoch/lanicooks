@@ -1,24 +1,11 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { StaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import Img from 'gatsby-image'
 
-const Hero = () => (
-  <StaticQuery
-    query={graphql`
-      query {
-        heroImage: file(relativePath: { eq: "okra.jpg" }) {
-          childImageSharp {
-            fluid(maxWidth: 1600) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    `}
-    render={data => <Img fluid={data.heroImage.childImageSharp.fluid} />}
-  />
-);
+const Hero = ({ image }) => <Img fluid={image.fluid} />
 
-export default Hero;
-
+Hero.propTypes = {
+  image: PropTypes.object.isRequired,
+}
+export default Hero

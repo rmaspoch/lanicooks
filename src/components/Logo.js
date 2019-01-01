@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import { StaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { StaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Logo = () => (
   <StaticQuery
@@ -18,7 +18,6 @@ const Logo = () => (
     `}
     render={data => <Img fixed={data.logoImage.childImageSharp.fixed} />}
   />
-);
+)
 
-export default Logo;
-
+export default Logo

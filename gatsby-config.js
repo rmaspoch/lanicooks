@@ -1,21 +1,18 @@
-require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+const config = require('./src/config/siteConfig')
 
 module.exports = {
-  siteMetadata: {
-    title: `Lani Cooks`,
-    subTitle: `and you are invited`,
-    description: `A blog about cooking healthy food for your family.`,
-    author: `@lanicooks`,
-  },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-react-svg`,
     {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN
+        accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
       },
-    }, {
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -23,8 +20,22 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-transformer-remark`,
-    `@contentful/gatsby-transformer-contentful-richtext`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images-contentful`,
+            options: {
+              maxWidth: 1600,
+              backgroundColor: '#fff',
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
+    },
+
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -35,7 +46,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `standalone`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/lanicooks-icon.png`, // This path is relative to the root of the site.
       },
     },
     {
