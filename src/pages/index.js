@@ -41,7 +41,7 @@ export const pageQuery = graphql`
     }
     allContentfulBlogPost(
       sort: { fields: [publishDate], order: DESC }
-      limit: 500
+      limit: 8
     ) {
       edges {
         node {
