@@ -2,10 +2,8 @@ const config = require('./src/config/siteConfig')
 
 let contentfulConfig
 try {
-  console.log('In config.js try block')
   contentfulConfig = require('./contentful')
 } catch (e) {
-  console.log('In config.js catch block')
   contentfulConfig = {
     production: {
       spaceId: process.env.CONTENTFUL_SPACE_ID,
@@ -13,7 +11,6 @@ try {
     },
   }
 } finally {
-  console.log('In config.js finally block')
   const { spaceId, accessToken } = contentfulConfig.production
   console.log(`spaceId: ${spaceId} accessToken: ${accessToken}`)
   if (!spaceId || !accessToken) {

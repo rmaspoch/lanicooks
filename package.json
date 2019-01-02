@@ -43,6 +43,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "gatsby-cli": "^2.4.8",
     "prettier": "^1.15.2",
     "tailwindcss": "^0.7.3"
   },
