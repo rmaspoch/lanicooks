@@ -6,13 +6,16 @@ try {
   contentfulConfig = require('./contentful')
 } catch (e) {
   console.log('In config.js catch block')
-  contentfulConfig.production = {
-    spaceId: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
+  contentfulConfig = {
+    production: {
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
+    },
   }
 } finally {
   console.log('In config.js finally block')
   const { spaceId, accessToken } = contentfulConfig.production
+  console.log(`spaceId: ${spaceId} accessToken: ${accessToken}`)
   if (!spaceId || !accessToken) {
     throw new Error('Contentful space id and access token need to be provided.')
   }
