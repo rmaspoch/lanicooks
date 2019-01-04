@@ -28,6 +28,9 @@ const baseBodyStyle = css`
   h3 {
     ${tw`font-display font-medium`}
   }
+  hr {
+    ${tw`border-grey-lightest`}
+  }
 `
 const Body = styled.div`
   ${baseBodyStyle}
@@ -66,6 +69,17 @@ const RecipeInstructions = styled.div`
   }
 `
 
+const RecipeMetadata = styled.div`
+  ${tw`mt-2`}
+`
+
+const RecipeMetaSection = styled.p`
+  ${tw`flex flex-col md:flex-row font-body font-medium text-sm my-0`}
+  span {
+    ${tw`mr-3`}
+  }
+`
+
 const BlogPost = ({ data }) => {
   const { title, featureImage, content, recipe } = data.contentfulBlogPost
   return (
@@ -81,6 +95,18 @@ const BlogPost = ({ data }) => {
             __html: content.childMarkdownRemark.html,
           }}
         />
+        <RecipeTitle>{title}</RecipeTitle>
+        <RecipeMetadata>
+          <RecipeMetaSection>{`Cuisine: ${recipe.cuisine}`}</RecipeMetaSection>
+          <RecipeMetaSection>{`Serves: ${recipe.servings}`}</RecipeMetaSection>
+        </RecipeMetadata>
+        <RecipeMetadata>
+          <RecipeMetaSection>
+            <span>Prep time: {`${recipe.prepTime}`}</span>
+            <span>Cook time: {`${recipe.cookingTime}`}</span>
+            <span>Total time: {`${recipe.totalTime}`}</span>
+          </RecipeMetaSection>
+        </RecipeMetadata>
         <RecipeTitle>Ingredients</RecipeTitle>
         <Body
           dangerouslySetInnerHTML={{
@@ -93,6 +119,16 @@ const BlogPost = ({ data }) => {
             __html: recipe.instructions.childMarkdownRemark.html,
           }}
         />
+        {recipe.notes && (
+          <React.Fragment>
+            <RecipeTitle>Notes</RecipeTitle>
+            <Body
+              dangerouslySetInnerHTML={{
+                __html: recipe.notes.childMarkdownRemark.html,
+              }}
+            />
+          </React.Fragment>
+        )}
       </Container>
     </Layout>
   )
@@ -121,12 +157,22 @@ export const pageQuery = graphql`
         }
       }
       recipe {
+        cuisine
+        servings
+        prepTime
+        cookingTime
+        totalTime
         ingredients {
           childMarkdownRemark {
             html
           }
         }
         instructions {
+          childMarkdownRemark {
+            html
+          }
+        }
+        notes {
           childMarkdownRemark {
             html
           }
