@@ -1,10 +1,7 @@
-exports.onServiceWorkerUpdateFound = () => {
-  const answer = window.confirm(
-    `Lani Cooks has been updated. ` +
-      `Would you like to reload the application to display the latest version?`
-  )
+/**
+ * Implement Gatsby's Browser APIs in this file.
+ *
+ * See: https://www.gatsbyjs.org/docs/browser-apis/
+ */
 
-  if (answer === true) {
-    window.location.reload()
-  }
-}
+// You can delete this file if you're not using it
