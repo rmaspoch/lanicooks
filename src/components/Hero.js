@@ -6,7 +6,6 @@ import { Breakpoints } from './Breakpoints'
 import Image from './Image'
 
 const Hero = ({ image }) => {
-  console.log(Breakpoints)
   return (
     <Image
       image={image.fluid}

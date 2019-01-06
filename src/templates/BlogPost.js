@@ -61,8 +61,8 @@ const RecipeInstructions = styled.div`
       content: counter(step-counter);
       position: absolute;
       top: 0;
-      left: -1.5rem;
-      width: 1.5rem;
+      left: -1.75rem;
+      width: 2rem;
       height: 2rem;
       padding: 0;
       ${tw`font-display font-medium leading-none text-2xl`}
