@@ -55,26 +55,26 @@ module.exports = {
 
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `Lani Cooks`,
-        short_name: `Lani Cooks`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `standalone`,
-        icon: `src/images/lanicooks-icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
       resolve: `gatsby-plugin-emotion`,
       options: {
         // Accepts all options defined by `babel-plugin-emotion` plugin.
       },
     },
     `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Lani Cooks`,
+        short_name: `Lani Cooks`,
+        start_url: `/`,
+        background_color: `#98181c`,
+        theme_color: `#98181c`,
+        display: `standalone`,
+        icon: `src/images/lanicooks-icon.png`, // This path is relative to the root of the site.
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    `gatsby-plugin-offline`,
   ],
 }
