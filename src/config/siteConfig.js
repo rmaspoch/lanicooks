@@ -6,4 +6,5 @@ module.exports = {
   siteLogo: 'lanicooks-logo.png',
   author: '@lanicooks',
   language: 'en',
+  heroHeight: '500px',
 }

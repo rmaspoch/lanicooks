@@ -34,7 +34,7 @@ export const pageQuery = graphql`
   query pageQuery {
     heroImage: file(relativePath: { eq: "cooking.png" }) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
+        fluid(maxWidth: 1920) {
           ...GatsbyImageSharpFluid
         }
       }

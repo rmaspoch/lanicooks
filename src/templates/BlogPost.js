@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 
 import config from '../config/siteConfig'
+import { Breakpoints } from '../components/Breakpoints'
 import Layout from '../components/Layout'
+import Image from '../components/Image'
 
 const Container = styled.div`
   ${tw`w-full md:w-4/5 md:mx-auto md:px-0 px-4 pb-4`}
@@ -87,7 +88,11 @@ const BlogPost = ({ data }) => {
       <Helmet>
         <title>{`${title} - ${config.siteTitle}`}</title>
       </Helmet>
-      <Img fluid={featureImage.fluid} />
+      <Image
+        image={featureImage.fluid}
+        minWidth={Breakpoints.xl}
+        height={config.heroHeight}
+      />
       <Container>
         <Title>{title}</Title>
         <Body
@@ -152,7 +157,7 @@ export const pageQuery = graphql`
       }
       featureImage {
         title
-        fluid(maxWidth: 1600, maxHeight: 600) {
+        fluid(maxWidth: 1600, quality: 80) {
           ...GatsbyContentfulFluid_withWebp_noBase64
         }
       }
