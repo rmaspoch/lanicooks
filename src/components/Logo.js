@@ -10,13 +10,15 @@ const Logo = () => (
         logoImage: file(relativePath: { eq: "lanicooks-logo.png" }) {
           childImageSharp {
             fixed(width: 87, height: 104) {
-              ...GatsbyImageSharpFixed
+              ...GatsbyImageSharpFixed_withWebp_noBase64
             }
           }
         }
       }
     `}
-    render={data => <Img fixed={data.logoImage.childImageSharp.fixed} />}
+    render={data => (
+      <Img fixed={data.logoImage.childImageSharp.fixed} alt="Lani Cooks logo" />
+    )}
   />
 )
 

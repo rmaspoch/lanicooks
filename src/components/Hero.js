@@ -5,10 +5,11 @@ import config from '../config/siteConfig'
 import { Breakpoints } from './Breakpoints'
 import Image from './Image'
 
-const Hero = ({ image }) => {
+const Hero = ({ image, imageAlt }) => {
   return (
     <Image
       image={image.fluid}
+      imageAlt={imageAlt}
       minWidth={Breakpoints.xl}
       height={config.heroHeight}
     />
@@ -17,5 +18,6 @@ const Hero = ({ image }) => {
 
 Hero.propTypes = {
   image: PropTypes.object.isRequired,
+  imageAlt: PropTypes.string.isRequired,
 }
 export default Hero

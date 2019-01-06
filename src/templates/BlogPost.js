@@ -90,6 +90,7 @@ const BlogPost = ({ data }) => {
       </Helmet>
       <Image
         image={featureImage.fluid}
+        imageAlt={featureImage.title}
         minWidth={Breakpoints.xl}
         height={config.heroHeight}
       />

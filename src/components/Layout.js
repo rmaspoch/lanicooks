@@ -13,10 +13,10 @@ const Wrapper = styled.div`
   ${tw`flex flex-col`}
 `
 
-const Layout = ({ children, heroImage }) => (
+const Layout = ({ children, heroImage, heroImageAlt }) => (
   <Wrapper>
     <Header title={config.siteTitle} tagline={config.siteTagline} />
-    {heroImage && <Hero image={heroImage} />}
+    {heroImage && <Hero image={heroImage} imageAlt={heroImageAlt || ''} />}
     {children}
   </Wrapper>
 )
@@ -24,6 +24,7 @@ const Layout = ({ children, heroImage }) => (
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   heroImage: PropTypes.object,
+  heroImageAlt: PropTypes.string,
 }
 
 export default Layout

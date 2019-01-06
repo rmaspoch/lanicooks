@@ -11,14 +11,15 @@ const ImageWrapper = styled.div`
     }
   }
 `
-const Image = ({ image, minWidth, height }) => (
+const Image = ({ image, imageAlt, minWidth, height }) => (
   <ImageWrapper minWidth={minWidth} height={height}>
-    <Img fluid={image} />
+    <Img fluid={image} alt={imageAlt} />
   </ImageWrapper>
 )
 
 Image.propTypes = {
   image: PropTypes.object.isRequired,
+  imageAlt: PropTypes.string.isRequired,
   minWidth: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
 }

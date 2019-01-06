@@ -37,7 +37,7 @@ const PostPreview = ({ post }) => {
     <PostContainer>
       <PostCard>
         <PostLink to={`/blog/${post.slug}`}>
-          <Img fluid={post.featureImage.fluid} />
+          <Img fluid={post.featureImage.fluid} alt={post.featureImage.title} />
           <PostBody>
             <PostTitle>{post.title}</PostTitle>
             <PostDescription>{post.description.description}</PostDescription>

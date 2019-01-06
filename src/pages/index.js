@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => {
   const posts = data.allContentfulBlogPost.edges
 
   return (
-    <Layout heroImage={heroImage}>
+    <Layout heroImage={heroImage} heroImageAlt="Cooking ingredients">
       <SEO title="Home" keywords={[`lani cooks`, `cooking`, `blog`]} />
       <PageBody>
         <SectionHeader title="Recent Posts" />
@@ -35,7 +35,7 @@ export const pageQuery = graphql`
     heroImage: file(relativePath: { eq: "cooking.png" }) {
       childImageSharp {
         fluid(maxWidth: 1920) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }

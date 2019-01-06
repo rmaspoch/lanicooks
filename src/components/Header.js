@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   ${tw`flex items-center justify between flex-wrap py-2 px-4`}
 `
 const LogoLink = styled(Link)`
-  ${tw`flex flex-row justify-start items-center no-underline mr-16`}
+  ${tw`flex flex-row justify-start items-center no-underline sm:mr-16`}
 `
 const TitleWrapper = styled.div`
   ${tw`flex flex-col ml-2`}
