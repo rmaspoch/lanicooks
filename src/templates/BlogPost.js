@@ -103,13 +103,19 @@ const BlogPost = ({ data }) => {
         />
         <RecipeTitle>{title}</RecipeTitle>
         <RecipeMetadata>
-          <RecipeMetaSection>{`Cuisine: ${recipe.cuisine}`}</RecipeMetaSection>
+          {recipe.cuisine && (
+            <RecipeMetaSection>{`Cuisine: ${
+              recipe.cuisine
+            }`}</RecipeMetaSection>
+          )}
           <RecipeMetaSection>{`Serves: ${recipe.servings}`}</RecipeMetaSection>
         </RecipeMetadata>
         <RecipeMetadata>
           <RecipeMetaSection>
             <span>Prep time: {`${recipe.prepTime}`}</span>
-            <span>Cook time: {`${recipe.cookingTime}`}</span>
+            {recipe.cookingTime && (
+              <span>Cook time: {`${recipe.cookingTime}`}</span>
+            )}
             <span>Total time: {`${recipe.totalTime}`}</span>
           </RecipeMetaSection>
         </RecipeMetadata>

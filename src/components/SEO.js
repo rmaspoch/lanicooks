@@ -4,14 +4,14 @@ import Helmet from 'react-helmet'
 
 import config from '../config/siteConfig'
 
-const SEO = ({ description, lang, meta, keywords, title }) => {
+const SEO = ({ description, language, meta, keywords, title }) => {
   const metaDescription = description || config.siteDescription
-  const language = lang || config.language
+  const lang = language || config.language
 
   return (
     <Helmet
       htmlAttributes={{
-        language,
+        lang,
       }}
       title={title}
       titleTemplate={`%s | ${config.siteTitle}`}
@@ -63,14 +63,14 @@ const SEO = ({ description, lang, meta, keywords, title }) => {
 }
 
 SEO.defaultProps = {
-  lang: `en`,
+  language: `en`,
   meta: [],
   keywords: [],
 }
 
 SEO.propTypes = {
   description: PropTypes.string,
-  lang: PropTypes.string,
+  language: PropTypes.string,
   meta: PropTypes.array,
   keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
