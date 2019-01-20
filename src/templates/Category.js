@@ -41,7 +41,38 @@ const CategoryTemplate = ({ data }) => {
   )
 }
 
-// TODO: PropTypes
+CategoryTemplate.propTypes = {
+  data: PropTypes.shape({
+    contentfulCategory: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      slug: PropTypes.string,
+      blog_post: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          title: PropTypes.string,
+          description: PropTypes.shape({
+            description: PropTypes.string,
+          }),
+          slug: PropTypes.string,
+          publishDate: PropTypes.string,
+          featureImage: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            fluid: PropTypes.object.isRequired,
+          }),
+          categories: PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string,
+              slug: PropTypes.string,
+              title: PropTypes.string,
+            }).isRequired
+          ),
+        })
+      ),
+    }),
+  }),
+}
+
 export default CategoryTemplate
 
 export const pageQuery = graphql`
