@@ -15,7 +15,7 @@ const RecipesPage = ({ data }) => {
     id: node.id,
     title: node.title,
     slug: node.slug,
-    count: node.blog_post.length,
+    count: node.blog_post ? node.blog_post.length : 0,
   }))
   const posts = data.allContentfulBlogPost.edges.map(({ node }) => ({
     id: node.id,
