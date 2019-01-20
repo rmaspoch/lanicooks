@@ -30,7 +30,7 @@ const Navigation = () => (
   <NavWrapper>
     <Nav>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/">Recipes</NavLink>
+      <NavLink to="/recipes">Recipes</NavLink>
       <NavLink to="/">Store</NavLink>
       <NavLink to="/">About</NavLink>
     </Nav>

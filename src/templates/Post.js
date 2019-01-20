@@ -11,12 +11,19 @@ import config from '../config/siteConfig'
 import { Breakpoints } from '../components/Breakpoints'
 import Layout from '../components/Layout'
 import Image from '../components/Image'
+import TagList from '../components/TagList'
 
 const Container = styled.div`
   ${tw`w-full md:w-4/5 md:mx-auto md:px-0 px-4 pb-4`}
 `
 const Title = styled.h2`
-  ${tw`font-display font-medium text-3xl uppercase`}
+  ${tw`font-display font-medium text-3xl uppercase mt-4 mb-2`}
+`
+const PostDate = styled.div`
+  ${tw`font-body text-grey-dark text-sm mb-2`}
+`
+const PostCategories = styled.div`
+  ${tw`my-2`}
 `
 const baseBodyStyle = css`
   ${tw`font-body`}
@@ -36,10 +43,10 @@ const baseBodyStyle = css`
 const Body = styled.div`
   ${baseBodyStyle}
 `
+
 const RecipeTitle = styled.h3`
   ${tw`font-display text-2xl uppercase`}
 `
-
 const RecipeInstructions = styled.div`
   ${baseBodyStyle}
   ol {
@@ -69,20 +76,24 @@ const RecipeInstructions = styled.div`
     }
   }
 `
-
 const RecipeMetadata = styled.div`
   ${tw`mt-2`}
 `
-
 const RecipeMetaSection = styled.p`
   ${tw`flex flex-col md:flex-row font-body font-medium text-sm my-0`}
   span {
     ${tw`mr-3`}
   }
 `
-
-const BlogPost = ({ data }) => {
-  const { title, featureImage, content, recipe } = data.contentfulBlogPost
+const PostTemplate = ({ data }) => {
+  const {
+    title,
+    publishDate,
+    categories,
+    featureImage,
+    content,
+    recipe,
+  } = data.contentfulBlogPost
   return (
     <Layout>
       <Helmet>
@@ -96,6 +107,10 @@ const BlogPost = ({ data }) => {
       />
       <Container>
         <Title>{title}</Title>
+        <PostDate>{publishDate}</PostDate>
+        <PostCategories>
+          <TagList tags={categories} />
+        </PostCategories>
         <Body
           dangerouslySetInnerHTML={{
             __html: content.childMarkdownRemark.html,
@@ -146,17 +161,63 @@ const BlogPost = ({ data }) => {
   )
 }
 
-BlogPost.propTypes = {
-  data: PropTypes.object.isRequired,
+PostTemplate.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    publishDate: PropTypes.string,
+    categories: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        slug: PropTypes.string,
+      }).isRequired
+    ),
+    content: PropTypes.shape({
+      childMarkdownRemark: PropTypes.shape({
+        html: PropTypes.string,
+      }),
+    }),
+    featureImage: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      fluid: PropTypes.object.isRequired,
+    }),
+    recipe: PropTypes.shape({
+      cuisine: PropTypes.string,
+      servings: PropTypes.string,
+      prepTime: PropTypes.string,
+      cookingTime: PropTypes.string,
+      totalTime: PropTypes.string,
+      ingredients: PropTypes.shape({
+        childMarkdownRemark: PropTypes.shape({
+          html: PropTypes.string,
+        }),
+      }),
+    }),
+    instructions: PropTypes.shape({
+      childMarkdownRemark: PropTypes.shape({
+        html: PropTypes.string,
+      }),
+    }),
+    notes: PropTypes.shape({
+      childMarkdownRemark: PropTypes.shape({
+        html: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
 }
 
-export default BlogPost
+export default PostTemplate
 
 export const pageQuery = graphql`
-  query blogPostQuery($slug: String!) {
+  query postQuery($slug: String!) {
     contentfulBlogPost(slug: { eq: $slug }) {
       title
       publishDate(formatString: "MMMM DD, YYYY")
+      categories {
+        id
+        title
+        slug
+      }
       content {
         childMarkdownRemark {
           html

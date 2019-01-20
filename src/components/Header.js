@@ -8,10 +8,6 @@ import { Link } from 'gatsby'
 import Logo from './Logo'
 import Navigation from './Navigation'
 
-// const Wrapper = styled.div`
-//   ${tw`w-full lg:w-4/5 md:mx-auto`}
-// `
-
 const Wrapper = styled.div`
   ${tw`flex items-center justify between flex-wrap py-2 px-4`}
 `

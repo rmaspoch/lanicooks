@@ -14,8 +14,9 @@ exports.onCreateBabelConfig = ({ actions: { setBabelPlugin } }) => {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  return new Promise((resolve, reject) => {
-    const blogPost = path.resolve('./src/templates/BlogPost.js')
+
+  const createBlogPosts = new Promise((resolve, reject) => {
+    const postTemplate = path.resolve('./src/templates/Post.js')
     resolve(
       graphql(`
         {
@@ -36,8 +37,8 @@ exports.createPages = ({ graphql, actions }) => {
         const posts = result.data.allContentfulBlogPost.edges
         posts.forEach((post, index) => {
           createPage({
-            path: `/blog/${post.node.slug}/`,
-            component: blogPost,
+            path: `/${post.node.slug}/`,
+            component: postTemplate,
             context: {
               slug: post.node.slug,
             },
@@ -46,4 +47,39 @@ exports.createPages = ({ graphql, actions }) => {
       })
     )
   })
+
+  const createCategories = new Promise((resolve, reject) => {
+    const categoryTemplate = path.resolve('./src/templates/Category.js')
+    resolve(
+      graphql(`
+        {
+          allContentfulCategory {
+            edges {
+              node {
+                title
+                slug
+              }
+            }
+          }
+        }
+      `).then(result => {
+        if (result.errors) {
+          reject(result.errors)
+        }
+
+        const categories = result.data.allContentfulCategory.edges
+        categories.forEach((category, index) => {
+          createPage({
+            path: `/category/${category.node.slug}/`,
+            component: categoryTemplate,
+            context: {
+              slug: category.node.slug,
+            },
+          })
+        })
+      })
+    )
+  })
+
+  return Promise.all([createBlogPosts, createCategories])
 }

@@ -12,15 +12,34 @@ const PostList = styled.div`
 const PostPreviewList = ({ posts }) => {
   return (
     <PostList>
-      {posts.map(({ node }) => {
-        return <PostPreview key={node.id} post={node} />
+      {posts.map(post => {
+        return <PostPreview key={post.id} post={post} />
       })}
     </PostList>
   )
 }
 
 PostPreviewList.propTypes = {
-  posts: PropTypes.array.isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      slug: PropTypes.string,
+      title: PropTypes.string,
+      publishDate: PropTypes.string,
+      description: PropTypes.string,
+      featureImage: PropTypes.shape({
+        title: PropTypes.string,
+        fluid: PropTypes.object,
+      }),
+      categories: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          slug: PropTypes.string,
+          title: PropTypes.string,
+        })
+      ),
+    })
+  ).isRequired,
 }
 
 export default PostPreviewList
