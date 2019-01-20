@@ -14,16 +14,19 @@ import SectionHeader from '../components/SectionHeader'
 import PostPreviewList from '../components/PostPreviewList'
 
 const CategoryTemplate = ({ data }) => {
-  const { title, slug, blog_post: blogPosts } = data.contentfulCategory
-  const posts = blogPosts.map(post => ({
-    id: post.id,
-    slug: post.slug,
-    title: post.title,
-    publishDate: post.publishDate,
-    description: post.description.description,
-    featureImage: post.featureImage,
-    categories: post.categories,
-  }))
+  const { title, blog_post: blogPosts } = data.contentfulCategory
+  const posts =
+    blogPosts && blogPosts.length > 0
+      ? blogPosts.map(post => ({
+          id: post.id,
+          slug: post.slug,
+          title: post.title,
+          publishDate: post.publishDate,
+          description: post.description.description,
+          featureImage: post.featureImage,
+          categories: post.categories,
+        }))
+      : []
 
   return (
     <Layout>
