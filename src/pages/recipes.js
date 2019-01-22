@@ -3,43 +3,61 @@ import PropTypes from 'prop-types'
 
 import { graphql } from 'gatsby'
 
+import styled from '@emotion/styled'
+
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import PageBody from '../components/PageBody'
 import SectionHeader from '../components/SectionHeader'
 import CategoryFilter from '../components/CategoryFilter'
 import PostPreviewList from '../components/PostPreviewList'
+import LoadMoreButton from '../components/LoadMoreButton'
 
-const RecipesPage = ({ data }) => {
-  const categories = data.allContentfulCategory.edges.map(({ node }) => ({
-    id: node.id,
-    title: node.title,
-    slug: node.slug,
-    count: node.blog_post ? node.blog_post.length : 0,
-  }))
-  const posts = data.allContentfulBlogPost.edges.map(({ node }) => ({
-    id: node.id,
-    slug: node.slug,
-    title: node.title,
-    publishDate: node.publishDate,
-    description: node.description.description,
-    featureImage: node.featureImage,
-    categories: node.categories,
-  }))
+class RecipesPage extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      recipesToShow: 4,
+    }
+  }
 
-  return (
-    <Layout>
-      <SEO
-        title="Recipes"
-        keywords={[`lani cooks`, `cooking`, `blog`, `recipes`]}
-      />
-      <PageBody>
-        <SectionHeader title="Recipes" />
-        <CategoryFilter categories={categories} />
-        <PostPreviewList posts={posts} />
-      </PageBody>
-    </Layout>
-  )
+  render() {
+    const data = this.props.data
+    const categories = data.allContentfulCategory.edges.map(({ node }) => ({
+      id: node.id,
+      title: node.title,
+      slug: node.slug,
+      count: node.blog_post ? node.blog_post.length : 0,
+    }))
+    const posts = data.allContentfulBlogPost.edges.map(({ node }) => ({
+      id: node.id,
+      slug: node.slug,
+      title: node.title,
+      publishDate: node.publishDate,
+      description: node.description.description,
+      featureImage: node.featureImage,
+      categories: node.categories,
+    }))
+
+    return (
+      <Layout>
+        <SEO
+          title="Recipes"
+          keywords={[`lani cooks`, `cooking`, `blog`, `recipes`]}
+        />
+        <PageBody>
+          <SectionHeader title="Recipes" />
+          <CategoryFilter categories={categories} />
+          <PostPreviewList posts={posts} count={this.state.recipesToShow} />
+          <LoadMoreButton loadMore={this.loadMore} />
+        </PageBody>
+      </Layout>
+    )
+  }
+
+  loadMore = () => {
+    this.setState({ recipesToShow: this.state.recipesToShow + 4 })
+  }
 }
 
 RecipesPage.propTypes = {

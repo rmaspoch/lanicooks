@@ -9,10 +9,11 @@ const PostList = styled.div`
   ${tw`flex flex-row flex-wrap -mx-3`}
 `
 
-const PostPreviewList = ({ posts }) => {
+const PostPreviewList = ({ posts, count }) => {
+  const items = count >= 0 ? posts.slice(0, count) : posts
   return (
     <PostList>
-      {posts.map(post => {
+      {items.map(post => {
         return <PostPreview key={post.id} post={post} />
       })}
     </PostList>
@@ -40,6 +41,7 @@ PostPreviewList.propTypes = {
       ),
     })
   ).isRequired,
+  count: PropTypes.number,
 }
 
 export default PostPreviewList

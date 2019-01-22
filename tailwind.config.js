@@ -128,6 +128,7 @@ let colors = {
   'pink-lightest': '#ffebef',
 
   accent: '#98181c',
+  'accent-dark': '#7b1317',
 }
 
 module.exports = {
