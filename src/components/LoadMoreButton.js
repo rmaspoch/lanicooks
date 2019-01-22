@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   ${tw`flex justify-center items-center p-3`}
 `
 const ShowMoreButton = styled.a`
-  ${tw`font-body text-lg font-semibold py-2 px-4 hover:text-accent flex flex-col items-center cursor-pointer`}
+  ${tw`font-body font-semibold text-lg py-2 px-4 hover:text-accent flex flex-col items-center cursor-pointer`}
 `
 const Icon = styled(ChevronDownIcon)`
   ${tw`ml-1`}
